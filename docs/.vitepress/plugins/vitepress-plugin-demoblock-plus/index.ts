@@ -2,6 +2,10 @@ import path from 'path'
 import fs from 'fs'
 import mdContainer from 'markdown-it-container'
 import { highlight } from '../../utils/highlight'
+// import bb from '@docs/bb'
+// console.log(bb)
+
+console.log(import.meta.glob)
 
 const VitePressPluginDemoBlockPlus = (md) => {
   md.use(mdContainer, 'demo', {
