@@ -5,7 +5,6 @@ import { highlight } from '../../utils/highlight'
 // import bb from '@docs/bb'
 // console.log(bb)
 
-console.log(import.meta.glob)
 
 const VitePressPluginDemoBlockPlus = (md) => {
   md.use(mdContainer, 'demo', {
@@ -29,6 +28,8 @@ const VitePressPluginDemoBlockPlus = (md) => {
             'utf-8'
           )
         }
+
+        console.log(11, import.meta.glob('../../utils/*.ts'))
 
         // 开始标签
         return `<Demo
