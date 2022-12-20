@@ -1,12 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import mdContainer from 'markdown-it-container'
-import { highlight } from '../../utils/highlight'
-// import bb from '@docs/bb'
-// console.log(bb)
+import { highlight } from '../utils/highlight'
+import { docRoot } from '../utils/paths'
 
+console.log(11, docRoot)
 
-const VitePressPluginDemoBlockPlus = (md) => {
+const mdPlugin = (md) => {
   md.use(mdContainer, 'demo', {
     validate(params) {
       return params.trim().match(/^demo\s*(.*)$/)
@@ -24,12 +24,10 @@ const VitePressPluginDemoBlockPlus = (md) => {
 
         if (sourceFileToken.type === 'inline') {
           source = fs.readFileSync(
-            path.resolve(__dirname, '../../../examples', `${sourceFile}.vue`),
+            path.resolve(docRoot, 'examples', `${sourceFile}.vue`),
             'utf-8'
           )
         }
-
-        console.log(11, import.meta.glob('../../utils/*.ts'))
 
         // 开始标签
         return `<Demo
@@ -47,4 +45,4 @@ const VitePressPluginDemoBlockPlus = (md) => {
   })
 }
 
-export default VitePressPluginDemoBlockPlus
+export { mdPlugin }

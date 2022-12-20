@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import nav from './config/nav'
 import sidebar from './config/sidebar'
-import VitePressPluginDemoBlockPlus from './plugins/vitepress-plugin-demoblock-plus'
+import { mdPlugin } from './config/plugins'
 
 export default defineConfig({
   title: '测试',
@@ -13,7 +13,7 @@ export default defineConfig({
   },
   markdown: {
     config: (md) => {
-      VitePressPluginDemoBlockPlus(md)
+      mdPlugin(md)
     }
   }
 })

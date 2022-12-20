@@ -3,6 +3,12 @@
     <p text="sm" v-html="decodedDescription" />
     <div class="example">
       <Example :file="path" :demo="demo" />
+
+      <ElDivider class="m-0" />
+
+      <div>
+        213
+      </div>
     </div>
   </ClientOnly>
 </template>
