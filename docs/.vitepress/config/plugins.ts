@@ -4,8 +4,6 @@ import mdContainer from 'markdown-it-container'
 import { highlight } from '../utils/highlight'
 import { docRoot } from '../utils/paths'
 
-console.log(11, docRoot)
-
 const mdPlugin = (md) => {
   md.use(mdContainer, 'demo', {
     validate(params) {
@@ -18,7 +16,6 @@ const mdPlugin = (md) => {
 
         const sourceFileToken = tokens[idx + 2]
         let source = ''
-        let demo = ''
         // :::demo  :::  中的内容 比如 table/base-table
         const sourceFile = sourceFileToken.children?.[0].content ?? ''
 
@@ -31,7 +28,7 @@ const mdPlugin = (md) => {
 
         // 开始标签
         return `<Demo
-            demo="${demo}"
+            :demos="demos"
             path="${sourceFile}"
             raw-source="${encodeURIComponent(source)}"
             source="${encodeURIComponent(highlight(source, 'vue'))}"

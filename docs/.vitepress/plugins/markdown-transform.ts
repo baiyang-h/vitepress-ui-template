@@ -12,27 +12,27 @@ export function MarkdownTransform(): Plugin {
     transform(code, id) {  // code md中的内容 ， id是解析得到的文件路径（md文件）
       if(!id.endsWith('.md')) return
       const componentId = path.basename(id, '.md')
-      const append = {
-        headers: [],
-        footers: [],
-        scriptSetups: [
-          `const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`,
-        ],
-      }
+      const scriptSetups = combineScriptSetup(`const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`)
       const compPath = path.resolve(docRoot, 'component')
       if(id.startsWith(compPath)) {
-        console.log(111, id, componentId, code)
-        code = transformComponentMarkdown(id, componentId, code, append)
       }
+      return combineMarkdown(code, scriptSetups)
     }
   }
 }
 
-const transformComponentMarkdown = (
-  id: string,
-  componentId: string,
-  code: string,
-  append: Append,
-) => {
+const combineScriptSetup = (code) => `
+  \n<script setup>
+  ${code}
+</script>
+`
 
+const combineMarkdown = (code, scriptSetups) => {
+  // 首先查找第一个 ## 的位置
+  const firstSubheader = code.indexOf('##')
+  // 找到第一个 ## 的位置，如果没有，则再尾部插入
+  const sliceIndex = firstSubheader < 0 ? code.length : firstSubheader
+
+  code = code.slice(0, sliceIndex) + scriptSetups +code.slice(sliceIndex)
+  return code
 }

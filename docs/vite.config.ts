@@ -3,7 +3,6 @@ import { resolve } from 'path'
 import { MarkdownTransform } from './.vitepress/plugins/markdown-transform'
 
 export default defineConfig(async ({ mode }) => {
-  console.log(1)
   return {
     resolve: {
       alias: [
