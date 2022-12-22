@@ -1,0 +1,13 @@
+
+.vp-doc table {
+  margin: 0;
+}
+
+.vp-doc tr {
+  border-top: 0;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 0;
+}
