@@ -21,8 +21,7 @@ defineProps( {
 
 <style scoped lang="scss">
 .example-showcase {
-  padding: 1.5rem;
-  margin: 0.5px;
+  //padding: 24px;
   //background-color: var(--bg-color);
 }
 </style>

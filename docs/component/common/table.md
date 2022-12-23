@@ -6,9 +6,10 @@
 
 基础的表格展示用法。
 
-:::demo Use `type`, `plain`, `round` and `circle` to define Button's style.
+:::demo
 
 table/base-table
 
 :::
+
 

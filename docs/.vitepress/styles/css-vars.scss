@@ -1,0 +1,35 @@
+:root {
+  // layouts
+  --vp-screen-max-width: 1376px;
+
+  // colors
+  --text-color: var(--el-text-color-primary);
+  --text-color-light: var(--el-text-color-regular);
+  --text-color-lighter: var(--el-text-color-secondary);
+
+  --brand-color: var(--el-color-primary);
+  --brand-color-light: var(--el-color-primary-light-1);
+  --bg-brand-color: var(--el-color-primary-light-9);
+
+  --bg-color: var(--el-bg-color);
+  --bg-color-soft: #fafafa;
+  --bg-color-mute: #f2f2f2;
+  --border-color: var(--el-border-color);
+  --border-color-light: var(--el-border-color-lighter);
+
+  --font-family: var(--el-font-family);
+  --font-family-mono: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas,
+  'Courier New', monospace;
+
+  // info
+  --success-color: var(--el-color-success);
+  --warning-color: var(--el-color-warning);
+  --danger-color: var(--el-color-danger);
+
+  // header vars
+  --header-height: 55px;
+  --nav-height: 55px; // alias of --header-height
+
+  /* Screen Size */
+  --vp-screen-max-width: 1362px;
+}

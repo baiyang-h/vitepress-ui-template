@@ -1,9 +1,14 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="Name" />
-      <el-table-column prop="address" label="Address" />
-      <el-table-column prop="date" label="Date" />
+    <el-table
+      v-loading="tableLoading"
+      :data="tableData"
+      max-height="300"
+      style="width: 100%"
+    >
+      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="address" label="地址" />
+      <el-table-column prop="date" label="日期" />
     </el-table>
     <el-pagination
       v-model:current-page="page.currentPage"
@@ -42,6 +47,11 @@ async function fetchList() {
           data: {
             list: [
               {
+                date: '2016-05-01',
+                name: 'Tom',
+                address: 'No. 189, Grove St, Los Angeles',
+              },
+              {
                 date: '2016-05-03',
                 name: 'Tom',
                 address: 'No. 189, Grove St, Los Angeles',
@@ -51,22 +61,12 @@ async function fetchList() {
                 name: 'Tom',
                 address: 'No. 189, Grove St, Los Angeles',
               },
-              {
-                date: '2016-05-04',
-                name: 'Tom',
-                address: 'No. 189, Grove St, Los Angeles',
-              },
-              {
-                date: '2016-05-01',
-                name: 'Tom',
-                address: 'No. 189, Grove St, Los Angeles',
-              },
             ],
             total: 9999
           },
           message: '成功',
         })
-      }, 1000)
+      }, 500)
     })
     tableData.value = r.data.list || []
     page.total = r.data.total
@@ -81,10 +81,12 @@ const handleSizeChange = (pageSize) => {
   console.log(pageSize)
   page.currentPage = 1
   page.pageSize = pageSize
+  fetchList()
 }
 
 const handleCurrentChange = (currentPage) => {
   console.log(currentPage)
   page.currentPage = currentPage
+  fetchList()
 }
 </script>

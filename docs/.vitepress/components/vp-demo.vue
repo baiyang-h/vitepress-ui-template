@@ -4,18 +4,28 @@
     <div class="example">
       <Example :file="path" :demo="formatPathDemos[path]" />
 
-      <ElDivider class="m-0" />
+      <div class="op-btns">
+        <ElIcon :size="16" class="op-btn" @click="handleCopy"><Copy /></ElIcon>
+        <ElIcon :size="16" class="op-btn" @click="sourceVisible=!sourceVisible"><Code /></ElIcon>
+      </div>
 
-      <div>
-        213
+      <div
+        class="code"
+        v-show="sourceVisible"
+      >
+        <SourceCode :source="source" />
       </div>
     </div>
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Example from './demo/vp-example.vue'
+import SourceCode from './demo/vp-source-code.vue'
+import Copy from './icons/copy.vue'
+import Code from './icons/code.vue'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   demos: Object,
@@ -24,6 +34,8 @@ const props = defineProps({
   path: String,
   rawSource: String,
 })
+
+const sourceVisible = ref(false)
 const decodedDescription = computed(() => decodeURIComponent(props.description))
 const formatPathDemos = computed(() => {
   const demos = {}
@@ -32,4 +44,32 @@ const formatPathDemos = computed(() => {
   })
   return demos
 })
+
+const handleCopy = () => {
+  ElMessage({
+    message: '复制成功',
+    type: 'success',
+  })
+  navigator.clipboard.writeText(decodeURIComponent(props.rawSource));
+}
 </script>
+
+<style scoped lang="scss">
+.example {
+  border: 1px solid var(--border-color);
+  border-radius: var(--el-border-radius-base);
+  padding: 24px;
+
+  .op-btns {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .op-btn {
+      margin: 0 8px;
+      cursor: pointer;
+    }
+  }
+}
+</style>
