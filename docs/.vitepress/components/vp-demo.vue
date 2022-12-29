@@ -35,6 +35,9 @@ const props = defineProps({
   rawSource: String,
 })
 
+console.log(11, decodeURIComponent(props.rawSource))
+console.log(22, decodeURIComponent(props.source))
+
 const sourceVisible = ref(false)
 const decodedDescription = computed(() => decodeURIComponent(props.description))
 const formatPathDemos = computed(() => {
