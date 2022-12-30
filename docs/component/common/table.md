@@ -46,4 +46,3 @@ const tableData = [
 ]
 </script>
 ```
-
