@@ -10,6 +10,7 @@ const mdPlugin = (md) => {
       return params.trim().match(/^demo\s*(.*)$/)
     },
     render(tokens, idx) {
+      console.log(idx, tokens)
       const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
       if (tokens[idx].nesting === 1) {
         const description = md.utils.escapeHtml(m[1])  // 描述内容
