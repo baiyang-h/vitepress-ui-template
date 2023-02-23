@@ -6,7 +6,7 @@
 
 基础的表格展示用法。
 
-:::demo
+:::demo 123213213
 
 table/base-table
 

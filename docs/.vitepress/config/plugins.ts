@@ -5,15 +5,18 @@ import { highlight } from '../utils/highlight'
 import { docRoot } from '../utils/paths'
 
 const mdPlugin = (md) => {
+  // 该部分只处理 :::demo 到 ::: 的部分
   md.use(mdContainer, 'demo', {
     validate(params) {
       return params.trim().match(/^demo\s*(.*)$/)
     },
+    // tokens 是对整个md文件的虚拟列表   idx 是虚拟列表上 :::demo 和结尾 ::: 的索引，即tokens中:::demo  ::: 部分
+    // tokens 为 [#h1开始, Table 表格, h1结束, p标签开始, 内容, p标签结束, :::demo开始， 内容， :::结束]  就这样的虚拟列表
+    // 当md文件中编译到有 :::demo xxx ::: 的时候会对她进行重新修改， 重新render内容如下
     render(tokens, idx) {
-      console.log(idx, tokens)
-      const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
-      if (tokens[idx].nesting === 1) {
-        const description = md.utils.escapeHtml(m[1])  // 描述内容
+      if (tokens[idx].nesting === 1) {  // 表示 container_demo_open   :::demo 开始
+        const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
+        const description = md.utils.escapeHtml(m[1])  // 描述内容   :::demo 后面的描述部分
 
         const sourceFileToken = tokens[idx + 2]
         let source = ''
@@ -21,13 +24,14 @@ const mdPlugin = (md) => {
         const sourceFile = sourceFileToken.children?.[0].content ?? ''
 
         if (sourceFileToken.type === 'inline') {
+          // 读取文件
           source = fs.readFileSync(
             path.resolve(docRoot, 'examples', `${sourceFile}.vue`),
             'utf-8'
           )
         }
-
         // 开始标签
+        // demos 是在markdown-transform插件中注入的demos变量，是所有examples文件夹下的文件
         return `<Demo
             :demos="demos"
             path="${sourceFile}"
@@ -35,7 +39,7 @@ const mdPlugin = (md) => {
             source="${encodeURIComponent(highlight(source, 'vue'))}"
             description="${encodeURIComponent(md.render(description))}"
         >`;
-      } else {
+      } else {  // container_demo_close    :::结束
         // 结束标签
         return `</Demo>`;
       }

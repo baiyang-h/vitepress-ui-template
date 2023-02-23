@@ -13,6 +13,7 @@ export default defineConfig({
   },
   markdown: {
     config: (md) => {
+
       mdPlugin(md)
     }
   }
