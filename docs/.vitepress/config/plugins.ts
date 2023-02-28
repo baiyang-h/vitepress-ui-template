@@ -32,18 +32,21 @@ const mdPlugin = (md) => {
         }
         // 开始标签
         // demos 是在markdown-transform插件中注入的demos变量，是所有examples文件夹下的文件
+        const block = '```vue\n' + source + ' ```'
+console.log(11, md.render(block))
+console.log(22, highlight(source, 'vue'))
         return `<Demo
             :demos="demos"
             path="${sourceFile}"
             raw-source="${encodeURIComponent(source)}"
-            source="${encodeURIComponent(highlight(source, 'vue'))}"
+            source="${encodeURIComponent(md.render(block))}"
             description="${encodeURIComponent(md.render(description))}"
         >`;
       } else {  // container_demo_close    :::结束
         // 结束标签
         return `</Demo>`;
       }
-    }
+    },
   })
 }
 
