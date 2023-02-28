@@ -14,6 +14,7 @@
         v-show="sourceVisible"
       >
         <SourceCode :source="source" />
+        <slot></slot>
       </div>
     </div>
   </ClientOnly>
