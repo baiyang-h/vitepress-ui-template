@@ -8,6 +8,6 @@
 
 :::demo 1111
 
-table/base-table
+<<< @/examples/table/base-table.vue
 
 :::

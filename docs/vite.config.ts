@@ -13,7 +13,7 @@ export default defineConfig(async ({ mode }) => {
       ]
     },
     plugins: [
-      MarkdownTransform()
+      // MarkdownTransform()
     ]
   }
 })

@@ -2,7 +2,7 @@
   <ClientOnly>
     <p text="sm" v-html="decodedDescription" />
     <div class="example">
-      <Example :file="path" :demo="formatPathDemos[path]" />
+      <Example :demo="demo" />
 
       <div class="op-btns">
         <ElIcon :size="16" class="op-btn" @click="handleCopy"><Copy /></ElIcon>
@@ -13,15 +13,16 @@
         class="code"
         v-show="sourceVisible"
       >
-        <SourceCode :source="source" />
-        <slot></slot>
+        <slot>
+          <SourceCode :source="source" />
+        </slot>
       </div>
     </div>
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, defineAsyncComponent  } from 'vue'
 import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import Copy from './icons/copy.vue'
@@ -29,24 +30,20 @@ import Code from './icons/code.vue'
 import { ElMessage } from 'element-plus'
 
 const props = defineProps({
-  demos: Object,
   description: String,
-  source: String,
   path: String,
-  rawSource: String,
+  source: String,
 })
 
-console.log(11, decodeURIComponent(props.rawSource))
-console.log(22, decodeURIComponent(props.source))
-
 const sourceVisible = ref(false)
+
 const decodedDescription = computed(() => decodeURIComponent(props.description))
-const formatPathDemos = computed(() => {
-  const demos = {}
-  Object.keys(props.demos).forEach(key => {
-    demos[key.replace('../../examples/', '').replace('.vue', '')] = props.demos[key].default
-  })
-  return demos
+
+// 将要加载的动态组件
+const demo = computed(() => {
+  // 相对路径
+  let path = '../../' +  props.path.replace(/[\s\S]*\/examples/, 'examples')
+  return defineAsyncComponent(() => import(/* @vite-ignore */path))
 })
 
 const handleCopy = () => {
@@ -54,7 +51,7 @@ const handleCopy = () => {
     message: '复制成功',
     type: 'success',
   })
-  navigator.clipboard.writeText(decodeURIComponent(props.rawSource));
+  navigator.clipboard.writeText(decodeURIComponent(props.source));
 }
 </script>
 

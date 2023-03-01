@@ -8,10 +8,6 @@
 
 <script setup>
 defineProps( {
-  file: {
-    type: String,
-    required: true,
-  },
   demo: {
     type: Object,
     required: true
