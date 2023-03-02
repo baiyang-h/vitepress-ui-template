@@ -4,6 +4,7 @@ import mdContainer from 'markdown-it-container'
 import { highlight } from '../utils/highlight'
 import { docRoot } from '../utils/paths'
 
+export const DEMO_COMPOENT_PREFIX = 'Demo__'; // 组件前缀避免名称冲突
 const mdPlugin = (md) => {
   const defaultFenceRender = md.renderer.rules.fence;
   // // // md.renderer.rules.fence 代码块部分，重写渲染规则
@@ -21,32 +22,60 @@ const mdPlugin = (md) => {
   // 该部分只处理 :::demo 到 ::: 的部分
   md.use(mdContainer, 'demo', {
     validate(params) {
-      return params.trim().match(/^demo\s*(.*)$/)
+      return !!params.trim().match(/^demo\s*(.*)$/)
     },
-    // tokens 是对整个md文件的虚拟列表   idx 是虚拟列表上 :::demo 和结尾 ::: 的索引，即tokens中:::demo  ::: 部分
-    // tokens 为 [#h1开始, Table 表格, h1结束, p标签开始, 内容, p标签结束, :::demo开始， 内容， :::结束]  就这样的虚拟列表
-    // 当md文件中编译到有 :::demo xxx ::: 的时候会对她进行重新修改， 重新render内容如下
+    /**
+     *  因为markdown-it-container 配置的原因，所以只对 :::demo ::: 格式的md部分进行重新编译规则修改
+     *  @param tokens 所有.md文件的虚拟列表
+     *  @param idx 相应的索引
+     */
     render(tokens, idx, options, env, self) {
-      if (tokens[idx].nesting === 1) {  // 表示 container_demo_open   :::demo 开始
+      console.log(idx, tokens)
+      if (tokens[idx].nesting === 1) {
+        let componentIndex = 0;
         const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
-        const description = md.utils.escapeHtml(m[1])  // 描述内容   :::demo 后面的描述部分
+        const description = m && m.length > 1 ? m[1] : ''  // 描述内容   :::demo 后面的描述部分
 
-        const nextToken = tokens[idx + 1]  // 即 ::demo  ::: 中的路径
+        const sourceFileToken = tokens[idx + 1]   // 导入得url路径 token
 
-        let sourcePath = ''
         let source = ''
-        if(nextToken.type === 'fence' && nextToken.src) {
-          // C:/Users/xx/Desktop/vitepress-ui/docs/examples/table/base-table.vue
-          sourcePath = nextToken.src.replace(/\\/g, '/');
+        let sourcePath = ''
+        if(sourceFileToken.type === 'fence' && sourceFileToken.src) {
+          // C:/Users/xx/examples/table/base-table.vue   格式化绝对路径
+          sourcePath = sourceFileToken.src.replace(/\\/g, '/');
+          // 引入文件得源码
           source = encodeURIComponent(fs.readFileSync(sourcePath).toString());
         }
+        if (!source) throw new Error(`Incorrect source file: ${sourcePath}`)
 
+        const componentName = `${DEMO_COMPOENT_PREFIX}${componentIndex += 1}`;
+
+        const scriptSetup = env.sfcBlocks.scriptSetup || {
+          content: '<script setup lang="ts">\n</script>',
+          tagOpen: '<script setup lang="ts">',
+          type: 'script',
+          contentStripped: '',
+          tagClose: '</script>',
+        };
+        scriptSetup.contentStripped += `import ${componentName} from '${sourcePath}';\n`;
+        scriptSetup.content = `${scriptSetup.tagOpen}${scriptSetup.contentStripped}${scriptSetup.tagClose}`;
+        env.sfcBlocks.scriptSetup = scriptSetup;
+        env.sfcBlocks.scripts = [scriptSetup];
+        /*
+         默认就是将 外部的:::demo 覆盖成 Demo，所以代码部分会直接当成slot默认插槽插入进去，如果想手动设置，可以使用下面的写法。注意 idx+1 因为现在的idx不是引入代码处的索引
+          :::demo
+            代码
+          :::
+          <template #code>
+            ${defaultFenceRender(tokens, idx+1, options, env, self)}
+          </template>
+         */
         return `<Demo
           path="${sourcePath}"
           source="${source}"
           description="${encodeURIComponent(md.render(description))}"
-        >
-      `;
+          :component="${componentName}"
+        >`;
       } else {  // container_demo_close    :::结束
         // 结束标签
         return `</Demo>`;

@@ -2,7 +2,7 @@
   <ClientOnly>
     <p text="sm" v-html="decodedDescription" />
     <div class="example">
-      <Example :demo="demo" />
+      <Example :demo="component" />
 
       <div class="op-btns">
         <ElIcon :size="16" class="op-btn" @click="handleCopy"><Copy /></ElIcon>
@@ -33,6 +33,7 @@ const props = defineProps({
   description: String,
   path: String,
   source: String,
+  component: Object
 })
 
 const sourceVisible = ref(false)
@@ -40,11 +41,11 @@ const sourceVisible = ref(false)
 const decodedDescription = computed(() => decodeURIComponent(props.description))
 
 // 将要加载的动态组件
-const demo = computed(() => {
-  // 相对路径
-  let path = '../../' +  props.path.replace(/[\s\S]*\/examples/, 'examples')
-  return defineAsyncComponent(() => import(/* @vite-ignore */path))
-})
+// const demo = computed(() => {
+//   // 相对路径
+//   let path = '../../' +  props.path.replace(/[\s\S]*\/examples/, 'examples')
+//   return defineAsyncComponent(() => import(/* @vite-ignore */path))
+// })
 
 const handleCopy = () => {
   ElMessage({
@@ -70,6 +71,12 @@ const handleCopy = () => {
     .op-btn {
       margin: 0 8px;
       cursor: pointer;
+    }
+  }
+
+  .code {
+    .shiki {
+      
     }
   }
 }
