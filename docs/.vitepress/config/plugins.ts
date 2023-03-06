@@ -1,24 +1,8 @@
-import path from 'path'
 import fs from 'fs'
 import mdContainer from 'markdown-it-container'
-import { highlight } from '../utils/highlight'
-import { docRoot } from '../utils/paths'
 
 export const DEMO_COMPOENT_PREFIX = 'Demo__'; // 组件前缀避免名称冲突
 const mdPlugin = (md) => {
-  const defaultFenceRender = md.renderer.rules.fence;
-  // // // md.renderer.rules.fence 代码块部分，重写渲染规则
-  // md.renderer.rules.fence = function (tokens, idx, options, env, self) {
-  //   const preToken = tokens[idx-1]
-  //   const isDemoToken = preToken.info.trim().match(/^demo\s*(.*)$/)
-  //   // 表示是 :::demo  xx ::: 的这种格式
-  //   if(tokens[idx].type === 'fence' && tokens[idx].src && isDemoToken && preToken.type === 'container_demo_open') {
-  //
-  //   }
-  //   console.log(env)
-  //   // 否则返回原本
-  //   return defaultFenceRender(tokens, idx, options, env, self)
-  // }
   // 该部分只处理 :::demo 到 ::: 的部分
   md.use(mdContainer, 'demo', {
     validate(params) {
@@ -30,7 +14,6 @@ const mdPlugin = (md) => {
      *  @param idx 相应的索引
      */
     render(tokens, idx, options, env, self) {
-      console.log(idx, tokens)
       if (tokens[idx].nesting === 1) {
         let componentIndex = 0;
         const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
@@ -62,6 +45,7 @@ const mdPlugin = (md) => {
         env.sfcBlocks.scriptSetup = scriptSetup;
         env.sfcBlocks.scripts = [scriptSetup];
         /*
+        const defaultFenceRender = md.renderer.rules.fence;
          默认就是将 外部的:::demo 覆盖成 Demo，所以代码部分会直接当成slot默认插槽插入进去，如果想手动设置，可以使用下面的写法。注意 idx+1 因为现在的idx不是引入代码处的索引
           :::demo
             代码

@@ -17,12 +17,14 @@
           <SourceCode :source="source" />
         </slot>
       </div>
+
+      <div class="hidden-code-b" v-if="sourceVisible" @click="handleHiddenCode">隐藏代码</div>
     </div>
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent  } from 'vue'
+import { computed, ref  } from 'vue'
 import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import Copy from './icons/copy.vue'
@@ -40,12 +42,6 @@ const sourceVisible = ref(false)
 
 const decodedDescription = computed(() => decodeURIComponent(props.description))
 
-// 将要加载的动态组件
-// const demo = computed(() => {
-//   // 相对路径
-//   let path = '../../' +  props.path.replace(/[\s\S]*\/examples/, 'examples')
-//   return defineAsyncComponent(() => import(/* @vite-ignore */path))
-// })
 
 const handleCopy = () => {
   ElMessage({
@@ -53,6 +49,10 @@ const handleCopy = () => {
     type: 'success',
   })
   navigator.clipboard.writeText(decodeURIComponent(props.source));
+}
+
+const handleHiddenCode = () => {
+  sourceVisible.value = false
 }
 </script>
 
@@ -74,10 +74,17 @@ const handleCopy = () => {
     }
   }
 
-  .code {
-    .shiki {
-      
-    }
+  .hidden-code-b {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    color: #409eff;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #fff;
+    //border-top: 1px solid var(--border-color);
+    cursor: pointer;
   }
 }
 </style>
