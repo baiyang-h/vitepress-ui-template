@@ -6,14 +6,21 @@
       max-height="300"
       style="width: 100%"
     >
-      <el-table-column prop="name" label="姓名" />
-      <el-table-column prop="address" label="地址" />
-      <el-table-column prop="date" label="日期" />
+      <el-table-column prop="name" label="姓名" width="120"  />
+      <el-table-column prop="address" label="地址" width="600" />
+      <el-table-column prop="date" label="日期" width="150"  />
+      <el-table-column fixed="right" label="操作" width="120">
+        <template #default>
+          <el-button link type="primary" size="small">编辑</el-button>
+          <el-button link type="primary" size="small">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       v-model:current-page="page.currentPage"
       v-model:page-size="page.pageSize"
       :page-sizes="[20, 50, 100, 200]"
+      :small="true"
       layout="total, sizes, prev, pager, next, jumper"
       :total="page.total"
       @size-change="handleSizeChange"

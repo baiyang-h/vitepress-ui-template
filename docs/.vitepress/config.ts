@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitepress'
 import nav from './config/nav'
 import sidebar from './config/sidebar'
-import { mdPlugin } from './config/plugins'
+import mdTransformPlugin from './plugins/md-transform'
+
 
 export default defineConfig({
   title: '测试',
@@ -13,8 +14,7 @@ export default defineConfig({
   },
   markdown: {
     config: (md) => {
-
-      mdPlugin(md)
+      mdTransformPlugin(md)
     }
   }
 })

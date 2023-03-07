@@ -2,7 +2,8 @@ import fs from 'fs'
 import mdContainer from 'markdown-it-container'
 
 export const DEMO_COMPOENT_PREFIX = 'Demo__'; // 组件前缀避免名称冲突
-const mdPlugin = (md) => {
+
+export default function mdTransformPlugin(md) {
   // 该部分只处理 :::demo 到 ::: 的部分
   md.use(mdContainer, 'demo', {
     validate(params) {
@@ -67,5 +68,3 @@ const mdPlugin = (md) => {
     },
   })
 }
-
-export { mdPlugin }

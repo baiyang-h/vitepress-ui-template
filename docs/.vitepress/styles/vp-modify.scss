@@ -1,6 +1,7 @@
 
 .vp-doc table {
   margin: 0;
+  overflow-x: visible;
 }
 
 .vp-doc tr {
@@ -23,4 +24,8 @@
 .VPDoc.has-aside .content-container {
   max-width: none !important;
   margin: 0;
+}
+
+.vp-doc tr:nth-child(2n) {
+  background-color: var(--el-fill-color-blank);
 }
