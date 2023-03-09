@@ -13,6 +13,10 @@
   border: 0;
 }
 
+.vp-doc ul, .vp-doc ol {
+  margin: 0;
+}
+
 .vp-doc li + li {
   margin-top: 0;
 }
@@ -28,4 +32,22 @@
 
 .vp-doc tr:nth-child(2n) {
   background-color: var(--el-fill-color-blank);
+}
+
+// 修改代码块处的横向滚动条
+.vp-doc .shiki {
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+  // <!--修改 滚动条的 下面 的 样式-- >
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #ededed;
+  }
+  // <!--修改 滑块 -- >
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #cfcfcf;
+  }
 }

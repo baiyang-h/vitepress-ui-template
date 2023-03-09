@@ -4,6 +4,7 @@ import mdContainer from 'markdown-it-container'
 export const DEMO_COMPOENT_PREFIX = 'Demo__'; // 组件前缀避免名称冲突
 
 export default function mdTransformPlugin(md) {
+  let componentIndex = 0;
   // 该部分只处理 :::demo 到 ::: 的部分
   md.use(mdContainer, 'demo', {
     validate(params) {
@@ -16,7 +17,6 @@ export default function mdTransformPlugin(md) {
      */
     render(tokens, idx, options, env, self) {
       if (tokens[idx].nesting === 1) {
-        let componentIndex = 0;
         const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
         const description = m && m.length > 1 ? m[1] : ''  // 描述内容   :::demo 后面的描述部分
 

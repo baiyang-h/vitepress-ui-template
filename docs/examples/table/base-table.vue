@@ -10,8 +10,8 @@
       <el-table-column prop="address" label="地址" width="600" />
       <el-table-column prop="date" label="日期" width="150"  />
       <el-table-column fixed="right" label="操作" width="120">
-        <template #default>
-          <el-button link type="primary" size="small">编辑</el-button>
+        <template #default="scope">
+          <el-button link type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
           <el-button link type="primary" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -84,4 +84,14 @@ const handleCurrentChange = (currentPage) => {
   page.currentPage = currentPage
   fetchList()
 }
+
+const handleEdit = ({ row, $index }) => {
+  console.log(row, $index)
+}
 </script>
+
+<style scoped>
+.el-pagination {
+  margin-top: 24px;
+}
+</style>

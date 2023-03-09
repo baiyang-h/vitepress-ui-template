@@ -1,6 +1,4 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import { MarkdownTransform } from './.vitepress/plugins/markdown-transform'
 
 export default defineConfig(async ({ mode }) => {
   return {
@@ -12,8 +10,6 @@ export default defineConfig(async ({ mode }) => {
         // },
       ]
     },
-    plugins: [
-      // MarkdownTransform()
-    ]
+    plugins: []
   }
 })

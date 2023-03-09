@@ -63,7 +63,7 @@ const handleHiddenCode = () => {
   padding: 24px;
 
   .op-btns {
-    padding: 8px;
+    padding: 16px 8px 8px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
