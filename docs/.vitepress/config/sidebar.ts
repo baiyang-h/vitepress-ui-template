@@ -22,6 +22,7 @@ const sidebarComponent = [
     items: [
       {text: 'Table', link: '/component/common/table'},
       {text: 'Form', link: '/component/common/form'},
+      {text: 'Dialog', link: '/component/common/dialog'},
     ]
   },
   {

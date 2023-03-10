@@ -3,13 +3,13 @@
     ref="formRef"
     :model="form"
     :rules="rules"
-    label-width="120px"
+    label-width="100px"
   >
     <el-form-item label="活动名称" prop="name">
-      <el-input v-model="form.name" />
+      <el-input v-model="form.name" clearable />
     </el-form-item>
     <el-form-item label="活动区域" prop="region">
-      <el-select v-model="form.region" placeholder="请选择活动区域">
+      <el-select v-model="form.region" placeholder="请选择活动区域" clearable>
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
@@ -98,8 +98,8 @@ const rules = reactive({
 })
 
 const handleSubmit = () => {
-  if (!formRef) return
-  formRef.validate((valid, fields) => {
+  if (!formRef.value) return
+  formRef.value.validate((valid, fields) => {
     if (valid) {
       console.log(form)
     } else {
@@ -109,7 +109,7 @@ const handleSubmit = () => {
 }
 
 const handleReset = () => {
-  if (!formRef) return
-  formRef.resetFields()
+  if (!formRef.value) return
+  formRef.value.resetFields()
 }
 </script>
