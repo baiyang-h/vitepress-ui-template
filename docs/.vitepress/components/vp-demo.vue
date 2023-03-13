@@ -6,7 +6,7 @@
 
       <div class="op-btns">
         <ElIcon :size="16" class="op-btn" @click="handleCopy"><Copy /></ElIcon>
-        <ElIcon :size="16" class="op-btn" @click="sourceVisible=!sourceVisible"><Code /></ElIcon>
+        <ElIcon :size="16" class="op-btn" @click="sourceVisible=!sourceVisible"><Code v-show="!sourceVisible" /><OpenCode v-show="sourceVisible" /></ElIcon>
       </div>
 
       <div
@@ -29,6 +29,7 @@ import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import Copy from './icons/copy.vue'
 import Code from './icons/code.vue'
+import OpenCode from "./icons/open-code.vue";
 import { ElMessage } from 'element-plus'
 
 const props = defineProps({

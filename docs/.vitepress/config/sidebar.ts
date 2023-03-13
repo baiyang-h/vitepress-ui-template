@@ -35,9 +35,20 @@ const sidebarComponent = [
   }
 ]
 
+const sidebarTool = [
+  {
+    text: '方法',
+    items: [
+      {text: '类型判断', link: '/tool/method/type'},
+      {text: '下载', link: '/tool/method/download'},
+    ]
+  },
+]
+
 const sidebar = {
   '/guide/': sidebarGuide,
-  '/component/': sidebarComponent
+  '/component/': sidebarComponent,
+  '/tool/': sidebarTool,
 }
 
 export default sidebar

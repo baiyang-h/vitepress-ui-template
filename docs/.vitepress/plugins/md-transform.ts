@@ -30,6 +30,7 @@ export default function mdTransformPlugin(md) {
           // 引入文件得源码
           source = encodeURIComponent(fs.readFileSync(sourcePath).toString());
         }
+        // 如果不是文件的写法
         if (!source) throw new Error(`Incorrect source file: ${sourcePath}`)
 
         const componentName = `${DEMO_COMPOENT_PREFIX}${componentIndex += 1}`;

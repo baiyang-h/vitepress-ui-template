@@ -27,9 +27,4 @@ const handleCancel = () => {
 const handleOk = () => {
   console.log('OK')
 }
-
-
 </script>
-<style scoped lang="scss">
-
-</style>
