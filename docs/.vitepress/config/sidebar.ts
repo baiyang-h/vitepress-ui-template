@@ -39,8 +39,25 @@ const sidebarTool = [
   {
     text: '方法',
     items: [
+      {text: '通用', link: '/tool/method/base'},
+      {text: '数组相关', link: '/tool/method/array'},
       {text: '类型判断', link: '/tool/method/type'},
+      {text: '正则', link: '/tool/method/regexp'},
+      {text: '时间日期', link: '/tool/method/time'},
       {text: '下载', link: '/tool/method/download'},
+      {text: '上传', link: '/tool/method/upload'},
+      {text: '复制', link: '/tool/method/copy'},
+    ]
+  },
+]
+
+const sidebarStyle = [
+  {
+    text: '样式',
+    items: [
+      {text: '通用', link: '/style/common'},
+      {text: '基础', link: '/style/base'},
+      {text: '布局', link: '/style/layout'},
     ]
   },
 ]
@@ -49,6 +66,7 @@ const sidebar = {
   '/guide/': sidebarGuide,
   '/component/': sidebarComponent,
   '/tool/': sidebarTool,
+  '/style/': sidebarStyle
 }
 
 export default sidebar
