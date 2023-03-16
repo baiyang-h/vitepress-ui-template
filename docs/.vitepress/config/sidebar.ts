@@ -31,7 +31,8 @@ const sidebarComponent = [
     collapsible: true,
     collapsed: true,
     items: [
-      {text: '配置规则组件', link: '/component/service/configure-rule'},
+      {text: '结果页', link: '/component/service/result-page'},
+      {text: '配置规则模块', link: '/component/service/configure-rule'},
     ]
   }
 ]
