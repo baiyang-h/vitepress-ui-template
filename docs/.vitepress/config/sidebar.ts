@@ -39,7 +39,7 @@ const sidebarTool = [
   {
     text: '方法',
     items: [
-      {text: '通用', link: '/tool/method/base'},
+      {text: '通用', link: '/tool/method/common'},
       {text: '数组相关', link: '/tool/method/array'},
       {text: '类型判断', link: '/tool/method/type'},
       {text: '正则', link: '/tool/method/regexp'},
