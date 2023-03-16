@@ -20,9 +20,10 @@ const sidebarComponent = [
   {
     text: '通用组件',
     items: [
-      {text: 'Table', link: '/component/common/table'},
-      {text: 'Form', link: '/component/common/form'},
-      {text: 'Dialog', link: '/component/common/dialog'},
+      {text: '表格', link: '/component/common/table'},
+      {text: '表单', link: '/component/common/form'},
+      {text: '弹框', link: '/component/common/dialog'},
+      {text: '页面', link: '/component/common/page'},
     ]
   },
   {
