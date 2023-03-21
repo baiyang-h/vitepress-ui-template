@@ -79,6 +79,20 @@ const mixin = {
     this.getTreeData()
   },
   methods: {
+    // 当是查看详情（外层表单），或者 列表中的表单处于详情（未创建等） 显示的效果时，该方法返回的文本即使展示的详情
+    // 因为首页的列表处是展示列表，那里也会使用该混入，只能写在此处，不能放在index.vue处。
+    formatFormDetail(data) {
+      const detail = [
+        { text: '交付信息更新', value: data.aaaaaaaa },
+        { text: '售后信息更新', value: data.bbbbbbbb },
+        { text: '服务单信息更新', value: data.cccccccc },
+      ]
+
+      return detail
+        .filter((item) => item.value)
+        .map((item) => item.text)
+        .join('、')
+    },
     // 获取初始化配置数据，如 编辑页面初始化的数据
     async getDetail() {
       const { data } = await salesTaskAutoCreateRuleDetail()

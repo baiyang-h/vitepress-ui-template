@@ -236,14 +236,6 @@ export default {
     },
   },
   methods: {
-    // 初始化默认表单，我看jwCascaderPanelMixin混入的地方也有用到
-    createDefaultForm() {
-      return {
-        aaaaaaaa: false,
-        bbbbbbbb: false,
-        cccccccc: false,
-      }
-    },
     // 自动创建任务节点？？
     formatFormDetail(data) {
       const detail = [
