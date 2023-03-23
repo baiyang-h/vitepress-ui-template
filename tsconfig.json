@@ -7,7 +7,8 @@
    "resolveJsonModule": true,
    "baseUrl": "./",
    "paths": {
-     "@docs/*": ["./docs/*"]
+     "@docs/*": ["./docs/*"],
+     "@/*": ["src/*"]
    },
    "types" : [
      "vite/client",
