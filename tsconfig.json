@@ -11,7 +11,7 @@
    },
    "types" : [
      "vite/client",
-     "node"
+     "node",
    ]
  },
   "include": ["docs/**/*.ts", "docs/**/*.d.ts", "docs/**/*.tsx", "docs/**/*.vue"],
