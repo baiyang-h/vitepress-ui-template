@@ -236,18 +236,21 @@ export default {
     },
   },
   methods: {
-    // 自动创建任务节点？？
-    formatFormDetail(data) {
-      const detail = [
-        { text: '交付信息更新', value: data.aaaaaaaa },
-        { text: '售后信息更新', value: data.bbbbbbbb },
-        { text: '服务单信息更新', value: data.cccccccc },
-      ]
-
-      return detail
-        .filter((item) => item.value)
-        .map((item) => item.text)
-        .join('、')
+    // 这个在jwCascaderPanelMixin混入里面有，他用于在点击创建和删除按钮时。整体模块表单灰显 disabled 的问题， 如果你有自定义的规则 可以重写该方法
+    // checkIsEmpty(val) {
+    //   const values = Object.entries(val)
+    //   if (values.some((item) => item[1] === undefined)) {
+    //     return true
+    //   }
+    //   return false
+    // },
+    // 初始化默认表单，我看jwCascaderPanelMixin混入的地方也有用到
+    createDefaultForm() {
+      return {
+        aaaaaaaa: false,
+        bbbbbbbb: false,
+        cccccccc: false,
+      }
     },
     // 创建表单验证规则
     createRule() {
