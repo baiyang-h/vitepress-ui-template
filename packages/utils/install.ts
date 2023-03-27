@@ -1,4 +1,4 @@
-import { SFCWithInstall } from '../types'
+import { SFCWithInstall } from '@/types'
 
 export const withInstall = <T, E extends Record<string, any>>(
   main: T,
@@ -17,3 +17,10 @@ export const withInstall = <T, E extends Record<string, any>>(
   }
   return main as SFCWithInstall<T> & E
 }
+
+// export const withInstall = comp => {
+//   comp.install = app => {
+//     app.component(comp.name, comp)
+//   }
+//   return comp
+// }

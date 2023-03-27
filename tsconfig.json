@@ -8,7 +8,7 @@
    "baseUrl": "./",
    "paths": {
      "@docs/*": ["./docs/*"],
-     "@/*": ["src/*"]
+     "@/*": ["packages/*"]
    },
    "types" : [
      "vite/client",

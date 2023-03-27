@@ -2,6 +2,6 @@ import { withInstall } from '@/utils/install'
 
 import Button from './src/button.vue'
 
-export const ElButton = withInstall(Button)
+export const ByButton = withInstall(Button)
 
-export default ElButton
+export default ByButton

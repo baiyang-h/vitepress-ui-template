@@ -1,25 +1,32 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue';
+import {fileURLToPath, URL} from "node:url";
+
 export default defineConfig({
   plugins: [vue()],
   build: {
     target: 'modules',
     // 打包文件目录
     outDir: 'es',
+    emptyOutDir: true,
     //压缩
     minify: false,
     rollupOptions: {
-      external: ['vue'],
-      input: ['src/index.ts'],
       output: {
         entryFileNames: '[name].js',
         preserveModules: true,
-        preserveModulesRoot: 'src',
+        preserveModulesRoot: 'packages',
       },
+      external: ['vue'],
     },
     lib: {
-      entry:'./src',
-      formats: ['es', 'cjs'],
+      entry:'./packages/index.ts',
+      formats: ['es'],
+    }
+  },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('../packages', import.meta.url)),
     }
   }
 })

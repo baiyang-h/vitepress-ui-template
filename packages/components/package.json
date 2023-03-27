@@ -1,0 +1,8 @@
+{
+  "name": "@h-ui/components",
+  "version": "1.0.0",
+  "description": "all components are settled here",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC"
+}
