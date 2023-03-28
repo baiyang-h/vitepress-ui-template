@@ -20,7 +20,7 @@ export default defineConfig({
       external: ['vue'],
     },
     lib: {
-      entry:'./packages/index.ts',
+      entry:'./packages',
       formats: ['es'],
     }
   },

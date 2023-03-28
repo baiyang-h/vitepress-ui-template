@@ -1,14 +1,16 @@
 {
-  "name": "vitepress-doc",
+  "name": "@juwan/v-ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "Quickly create a component library for Vue 3",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "docs:preview": "vitepress preview docs",
-    "build:es": "vite build -c scripts/vite.es.ts"
+    "build": "npm run build:es && npm run build:dist",
+    "build:es": "vite build -c scripts/vite.es.ts",
+    "build:dist": "vite build -c scripts/vite.dist.ts"
   },
   "author": "",
   "license": "ISC",
