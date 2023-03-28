@@ -1,5 +1,5 @@
 {
-  "name": "@juwan/v-ui",
+  "name": "@juwan/jw-ui",
   "version": "1.0.0",
   "description": "Quickly create a component library for Vue 3",
   "main": "index.js",

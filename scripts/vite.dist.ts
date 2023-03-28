@@ -19,7 +19,7 @@ export default  defineConfig({
       external: ['vue']
     },
     lib: {
-      name: 'VUI',
+      name: 'JuWan',
       entry: './packages',
     }
   },
