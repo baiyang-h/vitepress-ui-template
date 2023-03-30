@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue';
-import {fileURLToPath, URL} from "node:url";
-
+import { alias } from './common'
 export default defineConfig({
   plugins: [vue()],
   build: {
@@ -15,18 +14,16 @@ export default defineConfig({
       output: {
         entryFileNames: '[name].js',
         preserveModules: true,
-        preserveModulesRoot: 'packages',
+        preserveModulesRoot: 'src',
       },
       external: ['vue'],
     },
     lib: {
-      entry:'./packages',
+      entry:'./src',
       formats: ['es'],
     }
   },
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('../packages', import.meta.url)),
-    }
+    alias
   }
 })

@@ -4,13 +4,14 @@
   "description": "Quickly create a component library for Vue 3",
   "main": "index.js",
   "scripts": {
+    "dev": "vite -c ./dev/vite.config.ts",
+    "build": "npm run build:es && npm run build:dist",
+    "build:es": "vite build -c scripts/vite.es.ts",
+    "build:dist": "vite build -c scripts/vite.dist.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
-    "docs:preview": "vitepress preview docs",
-    "build": "npm run build:es && npm run build:dist",
-    "build:es": "vite build -c scripts/vite.es.ts",
-    "build:dist": "vite build -c scripts/vite.dist.ts"
+    "docs:preview": "vitepress preview docs"
   },
   "author": "",
   "license": "ISC",
