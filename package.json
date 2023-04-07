@@ -1,8 +1,10 @@
 {
-  "name": "@juwan/jw-ui",
+  "name": "jw-ui",
   "version": "1.0.0",
   "description": "Quickly create a component library for Vue 3",
-  "main": "index.js",
+  "files": ["dist"],
+  "main": "dist/jw-ui.js",
+  "module": "dist/jw-ui.mjs",
   "scripts": {
     "dev": "vite -c ./dev/vite.config.ts",
     "build": "npm run build:es && npm run build:dist",
@@ -13,6 +15,16 @@
     "docs:serve": "vitepress serve docs",
     "docs:preview": "vitepress preview docs"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baiyang-h/vitepress-ui-template.git"
+  },
+  "keywords": [
+    "vue",
+    "vitepress",
+    "component",
+    "library"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {

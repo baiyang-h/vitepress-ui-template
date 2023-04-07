@@ -5,5 +5,11 @@ export default {
 </script>
 
 <template>
-  <div>测试按钮</div>
+  <div class="a aaa">测试按钮111</div>
 </template>
+
+<style scoped lang="scss">
+.a {
+  background: orange;
+}
+</style>

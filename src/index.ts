@@ -1,3 +1,5 @@
+import './style/index.scss'
+
 import installer from './installer'
 
 export * from '@/components'

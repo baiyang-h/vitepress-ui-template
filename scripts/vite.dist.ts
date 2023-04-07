@@ -21,6 +21,8 @@ export default  defineConfig({
     lib: {
       name: 'JuWan',
       entry: './src',
+      formats: ['es', 'cjs', 'umd'],
+      fileName: 'jw-ui'
     }
   },
   resolve: {
