@@ -17,7 +17,6 @@ const formatList = (list) => {
     }
   })
 }
-
 ```
 
 ## 格式化数组&行内处理数据

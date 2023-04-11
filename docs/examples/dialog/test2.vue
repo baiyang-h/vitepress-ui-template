@@ -3,8 +3,8 @@
 
   <MyDialog
     ref="dialogRef"
-    @cancel="handleCancel"
-    @ok="handleOk"
+    @onCancel="handleCancel"
+    @onOk="handleOk"
   />
 </template>
 

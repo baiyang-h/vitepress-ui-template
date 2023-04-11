@@ -22,7 +22,7 @@ import { ref } from 'vue'
 
 const dialogVisible = ref(false)
 
-const emit = defineEmits(['cancel', 'ok'])
+const emit = defineEmits(['onCancel', 'onOk'])
 defineExpose({
   open
 })
@@ -35,12 +35,12 @@ function open(params) {
 // 取消
 const handleCancel = () => {
   dialogVisible.value = false
-  emit("cancel")
+  emit("onCancel")
 }
 // 确定
 const handleOk = () => {
   dialogVisible.value = false
-  emit("ok")
+  emit("onOk")
 }
 </script>
 <style scoped lang="scss">
