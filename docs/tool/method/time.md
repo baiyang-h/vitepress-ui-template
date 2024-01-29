@@ -165,6 +165,9 @@ moment(val).day()
 // 今天
 moment().format('YYYY/MM/DD')
 moment(new Date())
+// 今天00:00:00 和 今天24:00:00即第二天的开始
+const startDate = moment().startOf('day')
+const endDate = startDate.clone().add(1, 'days');
 
 // 前天
 moment().subtract(1, 'days').format('YYYY/MM/DD')
